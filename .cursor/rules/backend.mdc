@@ -1,0 +1,14 @@
+---
+description: Backend conventions — FastAPI, adapters, scan, agents.
+globs: ["backend/**/*"]
+---
+
+# Backend conventions
+
+- **Stack:** Python 3.11+, FastAPI, uvicorn. Use type hints and async where appropriate.
+- **Secrets:** All from environment (GROQ_API_KEY, DATABASE_URL, ALPHA_VANTAGE_API_KEY). Never hardcode.
+- **External data:** All external data goes through **adapters** and the **Scan service**. Do not call Alpha Vantage or Yahoo directly from API or agent code. Adapters implement `DataSourceAdapter` in `app/adapters/base.py`.
+- **TTLs and cache keys:** Defined in [scan.md](../../scan.md). Use (symbol, data_type, interval) for cache keys.
+- **Advice pipeline:** Sub-agents per scan step + one for mathematical context; main agent synthesizes. Progress events (step name, step index, total steps, percent, step failure) and SSE for advice stream. Session stores scan context and sub-agent summaries for chat context.
+- **Rate limiting:** Alpha Vantage free tier: 5/min, 25/day. Use `services/rate_limiter.py`; fallback to Yahoo when capped.
+- **Logging:** Every new feature must add logging. Use `logging.getLogger(__name__)`; log startup/mode, key decisions, errors, and important state. Never log secrets or raw provider messages. See non-negotiable rules.

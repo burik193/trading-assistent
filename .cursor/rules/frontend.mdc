@@ -1,0 +1,11 @@
+---
+description: Frontend conventions — Next.js, dark theme, API usage.
+globs: ["frontend/**/*"]
+---
+
+# Frontend conventions
+
+- **Stack:** Next.js 14+ (App Router), TypeScript, Tailwind. Dark theme by default.
+- **API:** Base URL from env (NEXT_PUBLIC_API_URL). Stock identifier in API is **ISIN**; display Name (and symbol when available).
+- **UX:** Dashboard first (graphs + colored metrics only; no advice until "Get financial advice"). One stock per session; new stock = new session. Progress: loading bar (%), status bar (steps, current, failures). Chat opens after advice with session context.
+- **Logging:** Every new feature must add logging. Use `console.log` or a structured logger for relevant events (API calls, errors, feature usage) so behaviour can be inspected in the browser console. See non-negotiable rules.

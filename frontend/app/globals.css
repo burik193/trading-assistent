@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0f0f0f;
+  --foreground: #e5e5e5;
+  --card: #1a1a1a;
+  --muted: #737373;
+  --scrollbar-track: #18181b;
+  --scrollbar-thumb: #52525b;
+  --scrollbar-thumb-hover: #71717a;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* Divider toggle buttons: force zinc palette (no browser/OS accent blue) */
+button[data-divider-toggle] {
+  color: #a1a1aa !important;
+}
+button[data-divider-toggle]:hover {
+  color: #d4d4d8 !important;
+  background-color: #3f3f46 !important;
+}
+button[data-divider-toggle]:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 1px #71717a !important;
+}
+button[data-divider-toggle]:focus:not(:focus-visible) {
+  box-shadow: none !important;
+}
+button[data-divider-toggle] svg {
+  color: inherit;
+}
+
+/* Model reasoning toggler chevron: force zinc (no browser blue) */
+[data-model-reasoning-chevron] {
+  color: #71717a !important;
+}
+[data-model-reasoning-chevron] svg {
+  color: inherit;
+}
+
+/* Scrollbars: dark theme to match app (zinc palette) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbar-track);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+*::-webkit-scrollbar-button {
+  display: none;
+}
+*::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

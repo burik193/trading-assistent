@@ -1,0 +1,16 @@
+---
+description: How to extend the project — adapters, API, agent tools, cache.
+globs: ["**/*"]
+---
+
+# Extending the project
+
+1. **New data source:** Add `backend/app/adapters/<name>.py` implementing `DataSourceAdapter` (see `adapters/base.py`). Register in scan service adapter list. No change to API or agent contract. Document in architecture.md "Current adapters" and in scan.md if new data_type or TTL.
+
+2. **New API route:** Add under `backend/app/api/routes/`. Use ISIN in path for stock endpoints.
+
+3. **New agent tool:** Add in `backend/app/agent/tools.py`, register in graph. Tool should use scan service or adapters, not raw HTTP.
+
+4. **New cache data_type:** Add TTL in scan.md and in scan_service; extend adapter interface if needed. Do not change cache key shape (symbol, data_type, interval) without updating scan.md and scan_service.
+
+**Do not:** Hardcode API keys; bypass Scan for external data; call Alpha Vantage or Yahoo from API/agent directly; remove or rename adapter interface methods without updating all adapters and scan_service.

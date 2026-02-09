@@ -1,0 +1,7 @@
+{
+    "mcpServers": {
+      "alphavantage": {
+        "url": "https://mcp.alphavantage.co/mcp?apikey=KVVXM5EXLL6WJIEY"
+      }
+    }
+}

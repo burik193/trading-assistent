@@ -1,0 +1,6 @@
+# Dependencies
+node_modules/
+.venv/
+
+# Local env (secrets); use .env.example as template
+.env

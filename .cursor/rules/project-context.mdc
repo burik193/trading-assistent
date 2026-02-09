@@ -1,0 +1,12 @@
+---
+description: Project context and architecture pointers for the financial assistant.
+globs: ["**/*"]
+---
+
+# Project context
+
+This is a **chat-based financial assistant**: users pick a stock from a sidebar (from `stocks_list.csv`), see a **dashboard** (graphs and colored metrics only, no LLM), then click **"Get financial advice"** to run a search pipeline (scan + sub-agents + main agent). Advice is streamed; afterwards **chat** opens with full session context. **One stock per session**; sessions are stored as chats in the sidebar. New stock = new session.
+
+- **Architecture:** Read [architecture.md](../../architecture.md) for stack, data flow, and backend layout.
+- **Scan and cache:** Read [scan.md](../../scan.md) for TTLs, cache keys, and rate limits.
+- **Stock identifier:** API uses **ISIN** (from CSV); backend resolves to ticker via `symbol_resolution`. Do not assume ticker in frontend URLs; use ISIN.

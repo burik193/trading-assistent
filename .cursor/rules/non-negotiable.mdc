@@ -1,0 +1,25 @@
+---
+description: Absolute non-negotiable rules for this project.
+globs: ["**/*"]
+---
+
+# Non-negotiable rules
+
+1. **Python and virtual environment**
+   - **Always** ensure a **uv venv** is active before running any Python command (scripts, uvicorn, alembic, tests, etc.).
+   - If the project does **not** have a uv virtual environment yet, **create one first** inside the project (e.g. `uv venv` in the project root, which creates `.venv/`).
+   - Do not run Python or pip/uv against the system Python without an active venv for this project.
+
+2. **Missing Python packages**
+   - If any Python package is missing when running the backend (or tests), **add it to `backend/requirements.txt`** with an appropriate version, then install it (e.g. `uv pip install -r backend/requirements.txt`). Do not leave dependencies out of requirements.
+
+3. **Starting the backend**
+   - Always ensure the **uv venv is active** before running `uvicorn`, `alembic`, or any Python script. If no venv exists in the project, run `uv venv` first to create `.venv/` in the project root.
+
+4. **Logging for new features**
+   - **Always** add logging for new features, in both **frontend** and **backend**. This is a non-negotiable principle of development.
+   - **Backend:** Use the app logger (e.g. `logging.getLogger(__name__)`) to log relevant events: startup/mode, key decisions, errors, and important state changes. Do not expose secrets or raw provider messages in log output.
+   - **Frontend:** Log relevant user or app events (e.g. API calls, errors, feature usage) via `console.log` or a structured logger so behaviour can be inspected in the browser console.
+   - New features must not ship without appropriate log statements.
+
+These rules apply to all contributors and tools (including AI) working on this codebase.
